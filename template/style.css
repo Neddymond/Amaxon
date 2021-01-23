@@ -1,0 +1,45 @@
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  font-size: 1.6rem;
+  font-family: "Catamaran Medium", Helvetica;
+}
+
+/* Layout */
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 5rem 1fr 5rem;
+  grid-template-areas: 
+    'header'
+    'main'
+    'footer'
+  ;
+  height: 100%;
+}
+
+header {
+  grid-area: header;
+  background-color: #203040;
+  color: #ffffff;
+  /* display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem; */
+} 
+
+main {
+  grid-area: main;
+  padding: 1 rem;
+}
+
+footer {
+  grid-area: footer;
+  background-color: #203040;
+  color: #ffffff;
+}

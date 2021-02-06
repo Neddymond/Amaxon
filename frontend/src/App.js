@@ -6,11 +6,11 @@ function App() {
     <div className="grid-container">
       <header className="row">
         <div>
-          <a className="brand" href="index.html">amaxon</a>
+          <a className="brand" href="/">amaxon</a>
         </div>
         <div>
-          <a href="cart.html">Cart</a>
-          <a href="signin.html">Sign In</a>
+          <a href="/cart">Cart</a>
+          <a href="/signin">Sign In</a>
         </div>
       </header>
       <main>
@@ -36,7 +36,7 @@ function App() {
                     <span><i className="fa fa-star"></i></span>
                     <span><i className="fa fa-star"></i></span>
                   </div>
-                  <div className="price">{`$${product.price}`}</div>
+                  <div className="price">${product.price}</div>
                 </div>
               </div>
             ))

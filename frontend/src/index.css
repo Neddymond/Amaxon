@@ -89,10 +89,10 @@ a.brand {
 /* Images */
 img {
   border-radius: 0.5rem;
-  
 }
 
 img.medium {
+  height: 250px;
   max-width: 18rem;
   width: 100%;
   padding: 0 5rem;

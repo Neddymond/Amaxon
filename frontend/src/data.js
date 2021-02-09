@@ -9,7 +9,7 @@ const data = {
       brand: "Sony",
       rating: 4.5,
       reviews: 9247,
-      description: "Wireless Industry Leading Noise Cancelling Overhead Headphones with Mic for Phone-Call and Alexa Voice Control, Blue"
+      description: "Noise Cancelling Overhead Headphones with Mic for Phone-Call and Alexa Voice Control"
     },
     {
       _id: 2,

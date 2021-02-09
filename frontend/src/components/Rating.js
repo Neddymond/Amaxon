@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default function Rating(props) {
-  const { rating, numReviews } = props;
+  const { rating, reviews } = props;
 
   return (
     <div>
@@ -51,7 +51,7 @@ export default function Rating(props) {
                 : "fa fa-star-o"
             } ></i>
           </span>
-          <span>{numReviews} reviews</span>
+          <span>{reviews} reviews</span>
       </div>    
     </div>
   );

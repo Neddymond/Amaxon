@@ -75,6 +75,36 @@ a.brand {
   font-weight: bold;
 }
 
+button {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 0.1rem #a4a4A4 solid;
+  font-size: 1.3rem;
+  font-family: "Catamaran Medium", Helvetica;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  cursor: pointer;
+}
+
+button:hover {
+  border: 0.1rem #404040 solid;
+}
+
+button.primary {
+  background-color: #f0c040;
+  width: 100%;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+li {
+  margin-top: 1rem;
+}
+
 .row {
   display: flex;
   flex-wrap: wrap;
@@ -91,11 +121,11 @@ a.brand {
 }
 
 .col-1 {
-  flex: 1, 1, 25rem;
+  flex: 1 1 25rem;
 }
 
 .col-2 {
-  flex: 2, 1, 50rem;
+  flex: 2 1, 50rem;
 }
 
 /* Images */
@@ -106,6 +136,13 @@ img {
 img.medium {
   height: 250px;
   max-width: 18rem;
+  width: 100%;
+  padding: 0 5rem;
+  background-color: #fff;
+}
+
+img.large {
+  max-width: 35rem;
   width: 100%;
   padding: 0 5rem;
   background-color: #fff;
@@ -138,4 +175,12 @@ img.medium {
 
 .rating span:last-child {
   color: #404040;
+}
+
+.success {
+  color: #20a020;
+}
+
+.error {
+  color: #a02020;
 }

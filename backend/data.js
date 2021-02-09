@@ -7,9 +7,10 @@ const data = {
       image: "/Images/p1.jpg",
       price: 299,
       brand: "Sony",
+      countInStock: 10,
       rating: 4.5,
       reviews: 9247,
-      description: "Noise Cancelling Overhead Headphones with Mic for Phone-Call and Alexa Voice Control"
+      description: "Wireless Industry Leading Noise Cancelling Overhead Headphones with Mic for Phone-Call and Alexa Voice Control, Blue"
     },
     {
       _id: 2,
@@ -18,6 +19,7 @@ const data = {
       image: "/Images/p2.jpg",
       price: 599,
       brand: "Apple",
+      countInStock: 20,
       rating: 4.5,
       reviews: 969,
       description: "New Apple Airpods Max - Pink"
@@ -29,6 +31,7 @@ const data = {
       image: "/Images/p3.jpg",
       price: 379,
       brand: "Sony",
+      countInStock: 15,
       rating: 4.5,
       reviews: 9247,
       description: "Bose Noise Cancelliing Wireless Bluetooth Headphones 700, with Alexa Voice control, Black"
@@ -40,6 +43,7 @@ const data = {
       image: "/Images/p4.jpg",
       price: 137,
       brand: "Plantronics",
+      countInStock: 0,
       rating: 4.6,
       reviews: 254,
       description: "Plantronics BlackBeat PRO2 Noise Cancelling Black"
@@ -51,6 +55,7 @@ const data = {
       image: "/Images/p5.jpg",
       price: 248,
       brand: "Sony",
+      countInStock: 5,
       rating: 4.5,
       reviews: 9247,
       description: "Sony WHXB900N Noise Cancelling Headphones, Wireless Bluetooth Over the Ear Headset with Mic for Phone-Call and Alexa Voice Control - Black"
@@ -62,6 +67,7 @@ const data = {
       image: "/Images/p6.jpg",
       price: 299,
       brand: "Bose",
+      countInStock: 7,
       rating: 4.7,
       reviews: 41889,
       description: "Bose Noise-Cancelling, with Alexa Voice Control - Black"
@@ -69,4 +75,5 @@ const data = {
   ]
 };
 
-export default data;
+// export default data;
+module.exports = data;

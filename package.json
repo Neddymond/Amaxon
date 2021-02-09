@@ -1,0 +1,17 @@
+{
+  "name": "amaxon",
+  "version": "1.0.0",
+  "description": "Amaxon is an Amazon clone created using Node.JS and React.\r This project waas inspired by @basir",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./backend/server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}

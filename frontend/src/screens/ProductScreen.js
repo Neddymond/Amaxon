@@ -1,10 +1,21 @@
-import React from 'react'
-import data from '../data'
+import React, { useState, useEffect } from 'react'
+// import data from '../../../backend/data'
 import Rating from '../components/Rating';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import axios from 'axios';
 
 export default function ProductScreen(props) {
-  const product = data.products.find((x) => x._id === Number(props.match.params.id));
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data } = await axios.get("/api/products");
+      setProducts(data);
+    };
+
+    fetchData();
+  }, []);
+  const product = products.find((x) => x._id === Number(props.match.params.id));
 
   if (!product) {
     return <div>Product Not Found</div>
@@ -46,7 +57,7 @@ export default function ProductScreen(props) {
                     {
                       product.countInStock > 0
                        ? (<span className="success">In Stock</span>)
-                       : (<span className="error">Unavailable</span>)
+                       : (<span className="danger">Unavailable</span>)
                     }
                   </div>
                 </div>

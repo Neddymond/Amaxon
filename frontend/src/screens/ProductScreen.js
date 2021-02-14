@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-// import data from '../../../backend/data'
+import React, { useState, useEffect } from 'react';
 import Rating from '../components/Rating';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import axios from 'axios';

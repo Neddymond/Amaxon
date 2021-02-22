@@ -75,6 +75,15 @@ a.brand {
   font-weight: bold;
 }
 
+.badge {
+  background-color: #f02020;
+  color: #ffffff;
+  border-radius: 50%;
+  padding: 0.2rem 1rem;
+  font-size: 1.4rem;
+  margin-left: 0.2rem;
+}
+
 button,
 input,
 select,

@@ -6,11 +6,20 @@ import {
 } from "redux";
 import thunk from "redux-thunk"; 
 import { productListReducer, productDetailsReducer } from "./reducers/productReducer";
-const initialState = {};
+import { cartReducer } from "./reducers/cartReducer";
+
+const initialState = {
+  cart: {
+    cartItems: localStorage.getItem("cartItems")
+      ? JSON.parse(localStorage.getItem("cartItems"))
+      : []
+  } 
+};
 
 const reducer = combineReducers({
   productList: productListReducer,
-  productInfo: productDetailsReducer
+  productInfo: productDetailsReducer,
+  cart: cartReducer
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

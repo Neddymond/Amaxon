@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { addToCart } from '../actions/cartActions';
+import { addToCart, removeFromCart } from '../actions/cartActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import MessageBox from '../components/MessageBox';
@@ -10,11 +10,8 @@ export default function CartScreen(props) {
     ? Number(props.location.search.split("=")[1])
     : 1;
 
-  console.log(qty);
-
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
-  console.log(cartItems);
 
   const dispatch = useDispatch();
   
@@ -25,7 +22,7 @@ export default function CartScreen(props) {
   }, [dispatch, productId, qty]);
 
   const removeFromCartHandler = (id) => {
-    // delete action
+    dispatch(removeFromCart(id));
   }
   
   const checkoutHandler = () => { props.history.push("/signin?redirect=shipping")}

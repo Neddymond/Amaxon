@@ -79,7 +79,7 @@ a.brand {
   background-color: #f02020;
   color: #ffffff;
   border-radius: 50%;
-  padding: 0.2rem 1rem;
+  padding: 0.1rem 0.8rem;
   font-size: 1.4rem;
   margin-left: 0.2rem;
 }
@@ -147,9 +147,18 @@ li {
   flex: 2 1, 50rem;
 }
 
+.min-30 {
+  min-width: 30rem;
+}
+
 /* Images */
 img {
   border-radius: 0.5rem;
+}
+
+img.small {
+  max-width: 5rem;
+  width: 100%;
 }
 
 img.medium {

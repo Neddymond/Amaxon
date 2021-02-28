@@ -1,7 +1,12 @@
+require("./db/mongoose");
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
 const data = require("./data");
+const userRouter = require("./routers/userRouter");
+
+app.use(express.json());
+app.use(userRouter);
 
 // Return products data
 app.get("/api/products", (req, res) => res.send(data.products));

@@ -17,4 +17,15 @@ router.get("/seed", async (req, res) => {
   }
 });
 
+// Endpoint for user sign in
+router.post("/signin", async (req, res) => {
+  try {
+    const user = await User.FindByCredentials(req.body.email, req.body.password);
+    const token = await user.GenerateAuthToken();
+    res.send({ user, token });
+  } catch (e) {
+    res.status(500).send(e);
+  }
+});
+
 module.exports = router;

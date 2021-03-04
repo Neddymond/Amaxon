@@ -37,7 +37,7 @@ header {
 
 main {
   grid-area: main;
-  padding: 1 rem;
+  padding: 1rem;
 }
 
 footer {
@@ -228,4 +228,19 @@ img.large {
 .alert-danger {
   color: #a02020;
   background-color: #ffe0e0e0;
+}
+
+.form {
+  max-width: 60rem;
+  margin: 0 auto;
+}
+
+.form > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.form label {
+  margin: 1rem 0;
+  display: block;
 }

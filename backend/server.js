@@ -6,7 +6,7 @@ const userRouter = require("./routers/userRouter");
 const productRouter = require("./routers/productRouter");
 
 app.use(express.json());
-app.use("/api", userRouter);
+app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
 
 app.get("/", (req, res) => res.send("Server is ready"));

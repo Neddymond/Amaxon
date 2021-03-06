@@ -1,5 +1,5 @@
 const express = require("express");
-const router = express();
+const router = express.Router();
 const User = require("../models/user");
 const data = require("../data");
 
@@ -24,7 +24,8 @@ router.post("/signin", async (req, res) => {
     const token = await user.GenerateAuthToken();
     res.send({ user, token });
   } catch (e) {
-    res.status(500).send(e);
+    // console.log(e)
+    res.status(401).send(e);
   }
 });
 

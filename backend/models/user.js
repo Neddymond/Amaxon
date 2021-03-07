@@ -49,5 +49,15 @@ userSchema.statics.FindByCredentials = async (email, password) => {
   return user;
 };
 
+userSchema.pre("save", async function(next) {
+  const user = this;
+
+  if (user.isModified("password")) {
+    user.password = await bcrypt.hashSync(user.password, 8);
+  }
+
+  next();
+});
+
 const User = mongoose.model("User", userSchema);
 module.exports = User;

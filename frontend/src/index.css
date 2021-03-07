@@ -205,6 +205,10 @@ img.large {
   color: #404040;
 }
 
+.loading {
+  display: block !important;
+}
+
 .success {
   color: #20a020;
 }

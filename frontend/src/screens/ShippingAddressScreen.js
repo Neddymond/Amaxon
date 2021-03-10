@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { saveShippingAddress } from '../actions/cartActions';
 
 export default function ShippingAddressScreen(props) {
-  const userSignin = useSelector(state => state.userSignin)
+  const userSignin = useSelector((state) => state.userSignin)
   const { userInfo } = userSignin;
   if (!userInfo) {
     props.history.push("/signin");
@@ -25,7 +25,7 @@ export default function ShippingAddressScreen(props) {
     e.preventDefault();
     dispatch(saveShippingAddress({ fullName, address, city, postalCode, country }));
     props.history.push("/payment");
-  }
+  };
 
   return (
     <div>
@@ -96,4 +96,4 @@ export default function ShippingAddressScreen(props) {
       </form>
     </div>
   )
-}
+};

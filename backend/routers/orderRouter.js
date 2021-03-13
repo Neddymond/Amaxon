@@ -10,10 +10,12 @@ router.post("/", auth, async (req, res) => {
       return res.status(400).send({ message: "Cart is empty" });
     }
 
-    const order = new Order({
+    const order = await new Order({
       ...req.body,
       user: req.user._id
     });
+
+    console.log(order)
 
     await order.save();
 
@@ -21,4 +23,6 @@ router.post("/", auth, async (req, res) => {
   } catch (e) {
     res.status(500).send(e);
   }
-})
+});
+
+module.exports = router;

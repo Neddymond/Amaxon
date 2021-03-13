@@ -65,7 +65,7 @@ function App() {
           <Route path="/register" component={RegisterScreen}></Route>
           <Route path="/shipping" component={ShippingAddressScreen}></Route>
           <Route path="/payment" component={PaymentMethodScreen}></Route>
-          <Route path="/placeorder" component={PlaceOrderScreen}></Route>
+          <Route path="/order" component={PlaceOrderScreen}></Route>
         </main>
         <footer className="row center">All rights reserved</footer>
       </div>

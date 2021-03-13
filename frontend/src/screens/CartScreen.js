@@ -41,7 +41,7 @@ export default function CartScreen(props) {
                 <ul>
                   {
                     cartItems.map((item) => (
-                      <li key={item.productId}>
+                      <li key={item.product}>
                         <div className="row">
                           <div>
                             <img 
@@ -51,10 +51,10 @@ export default function CartScreen(props) {
                             </img>
                           </div>
                           <div className="min-30">
-                            <Link to={`/product/${item.productId}`}>{item.name}</Link>
+                            <Link to={`/product/${item.product}`}>{item.name}</Link>
                           </div>
                           <div>
-                            <select value={item.qty} onChange={e => dispatch(addToCart(item.productId, Number(e.target.value)))}>
+                            <select value={item.qty} onChange={e => dispatch(addToCart(item.product, Number(e.target.value)))}>
                             {
                               [...Array(item.countInStock).keys()].map(x => (
                                 <option key={x + 1} value={x + 1}>{x + 1}</option>
@@ -66,7 +66,7 @@ export default function CartScreen(props) {
                           <div>
                             <button 
                               type="button"
-                              onClick={() => removeFromCartHandler(item.productId)}>
+                              onClick={() => removeFromCartHandler(item.product)}>
                                 Delete
                             </button>
                           </div>

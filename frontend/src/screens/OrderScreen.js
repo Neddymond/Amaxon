@@ -4,6 +4,44 @@ import { Link } from "react-router-dom";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import { detailsOrder } from '../actions/orderAction';
+import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
+
+function HandlePay({order}, successPaymentHandler) {
+  const config = {
+    public_key: process.env.REACT_APP_PUBLIC_KEY,
+    tx_ref: Date.now(),
+    amount: order.totalPrice,
+    currency: 'NGN',
+    payment_options: 'card,mobilemoney,ussd',
+    customer: {
+      email: order.email,
+      phonenumber: '07064586146',
+      name: order.name,
+    },
+    customizations: {
+      title: 'Payment',
+      description: 'Payment for items in cart',
+    },
+  };
+
+  const handleFlutterPayment = useFlutterwave(config);
+
+  return (<button
+    className="primary"
+    onClick={() => {
+      handleFlutterPayment({
+        callback: (response) => {
+          successPaymentHandler();
+          console.log(response);
+          closePaymentModal();
+        },
+        onClose: () => {},
+      });
+    }}
+  >
+    Pay Now
+  </button>);
+};
 
 export default function OrderScreen(props) {
   const orderId = props.match.params.id;
@@ -17,13 +55,17 @@ export default function OrderScreen(props) {
     dispatch(detailsOrder(orderId));
   }, [dispatch, orderId]);
 
+  const successPaymentHandler = () => {
+    //
+  }
+
   return loading
     ? (<LoadingBox></LoadingBox>)
     : error
     ? (<MessageBox variant="danger">{error}</MessageBox>)
     : (
         <div>
-          <h1>Order {order._id}</h1>
+          <h1>Order {order.order._id}</h1>
           <div className="row top">
             <div className="col-2">
               <ul>
@@ -31,16 +73,16 @@ export default function OrderScreen(props) {
                   <div className="card card-body">
                     <h2>Shipping</h2>
                     <p>
-                      <strong>Name:</strong> {order.shippingAddress.fullName} <br />
-                      <strong>Address: </strong>{order.shippingAddress.address}, 
-                        {order.shippingAddress.city},
-                        {order.shippingAddress.postalCode}
-                        {order.shippingAddress.country}
+                      <strong>Name:</strong> {order.order.shippingAddress.fullName} <br />
+                      <strong>Address: </strong>{order.order.shippingAddress.address}, 
+                        {order.order.shippingAddress.city},
+                        {order.order.shippingAddress.postalCode}
+                        {order.order.shippingAddress.country}
                     </p>
                     {
-                      order.isDelivered
+                      order.order.isDelivered
                         ? (<MessageBox variant="success">
-                            Delivered at {order.deliveredAt}
+                            Delivered at {order.order.deliveredAt}
                           </MessageBox>)
                         : (<MessageBox variant="danger">Not Delivered</MessageBox>)
                     }
@@ -50,12 +92,12 @@ export default function OrderScreen(props) {
                   <div className="card card-body">
                     <h2>Payment</h2>
                     <p>
-                      <strong>Method:</strong> {order.paymentMethod}
+                      <strong>Method:</strong> {order.order.paymentMethod}
                     </p>
                     {
-                      order.isPaid
+                      order.order.isPaid
                         ? (<MessageBox variant="success">
-                            Paid at {order.paidAt}
+                            Paid at {order.order.paidAt}
                           </MessageBox>)
                         : (<MessageBox variant="danger">Not Paid</MessageBox>)
                     }
@@ -66,7 +108,7 @@ export default function OrderScreen(props) {
                     <h2>Order Items</h2>
                     <ul>
                       {
-                        order.orderItems.map((item) => (
+                        order.order.orderItems.map((item) => (
                           <li key={item.product}>
                             <div className="row">
                               <div>
@@ -98,25 +140,30 @@ export default function OrderScreen(props) {
                   <li>
                     <div className="row">
                       <div>Items</div>
-                      <div>${order.itemsPrice.toFixed(2)}</div>
+                      <div>${order.order.itemsPrice.toFixed(2)}</div>
                     </div>
                   </li>
                   <li>
                     <div className="row">
                       <div>Shipping</div>
-                      <div>${order.shippingPrice.toFixed(2)}</div>
+                      <div>${order.order.shippingPrice.toFixed(2)}</div>
                     </div>
                   </li>
                   <li>
                     <div className="row">
                       <div>Tax</div>
-                      <div>${order.taxPrice.toFixed(2)}</div>
+                      <div>${order.order.taxPrice.toFixed(2)}</div>
                     </div>
                   </li>
                   <li>
                     <div className="row">
                       <div><strong>Order Total</strong></div>
-                      <div><strong>${order.totalPrice.toFixed(2)}</strong></div>
+                      <div><strong>${order.order.totalPrice.toFixed(2)}</strong></div>
+                    </div>
+                  </li>
+                  <li>
+                    <div className="row">
+                      {!order.isPaid && <HandlePay order={order}></HandlePay>}
                     </div>
                   </li>
                 </ul>

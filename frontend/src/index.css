@@ -114,6 +114,20 @@ button.primary {
   width: 100%;
 }
 
+a.primary {
+  color: #000;
+  text-align: center;
+  background-color: #f0c040;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 0.1rem #a4a4A4 solid;
+  font-size: 1.3rem;
+  font-family: "Catamaran Medium", Helvetica;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 ul {
   margin: 0;
   padding: 0;

@@ -23,14 +23,22 @@ router.post("/", auth, async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
-  const order = await Order.findById(req.params.id);
+router.get("/:id", auth, async (req, res) => {
+  try {
+    const order = await Order.findById(req.params.id);
 
-  if (!order) {
-    return res.status(404).send({ message: "Order not found" });
+    if (!order) {
+      return res.status(404).send({ message: "Order not found" });
+    }
+    
+    res.send({
+      order, 
+      name: req.user.name, 
+      email: req.user.email 
+    });
+  } catch (e) {
+    res.status(500).send(e);
   }
-
-  res.send(order);
 });
 
 module.exports = router;

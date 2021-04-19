@@ -5,7 +5,10 @@ import  {
   USER_SIGNOUT,
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
-  USER_REGISTER_FAIL
+  USER_REGISTER_FAIL,
+  USER_DETAILS_REQUEST,
+  USER_DETAILS_FAIL,
+  USER_DETAILS_SUCCESS
 } from "../constants/userConstants";
 import Axios from "axios";
 
@@ -50,3 +53,23 @@ export const signout = () => (dispatch) => {
   localStorage.removeItem("shippingAddress");
   dispatch({ type: USER_SIGNOUT });
 };
+
+export const userDetails = (userId) => async (dispatch, getState) => {
+  dispatch({ type: USER_DETAILS_REQUEST, payload: userId });
+
+  const { userSignin: { userInfo } } = getState();
+
+  try {
+    const { data } = await Axios.get(`/api/users/${userId}`, {
+      headers: { Authorization: `Bearer ${userInfo.token}` }
+    });
+
+    dispatch({ type: USER_DETAILS_SUCCESS, payload: data });
+  } catch (err) {
+    const message = err.response && err.response.data.message
+    ? err.response.data.message
+    : err.message;
+
+    dispatch({ type: USER_DETAILS_FAIL, payload: message });
+  }
+}

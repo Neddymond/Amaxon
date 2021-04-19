@@ -80,6 +80,6 @@ router.put("/:id/pay", auth, async (req, res) => {
   } catch (e) {
     res.status(500).send({ message: e });
   }
-})
+});
 
 module.exports = router;

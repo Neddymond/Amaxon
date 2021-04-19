@@ -83,12 +83,10 @@ export default function SigninScreen(props) {
           ></input>
         </div>
         <div>
-          <label />
           <button className="primary" type="submit">Register</button>
         </div>
         <div>
-          <label />
-          <div>Already have an account? <Link to={`/signin?redirect=${redirect}`}>Sign In</Link></div>
+          Already have an account? <Link to={`/signin?redirect=${redirect}`}>Sign In</Link>
         </div>
       </form>
     </div>

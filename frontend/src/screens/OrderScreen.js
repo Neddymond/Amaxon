@@ -3,60 +3,72 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
-import { detailsOrder } from '../actions/orderAction';
+import { detailsOrder, payOrder } from '../actions/orderAction';
 import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
+import { ORDER_PAY_RESET } from '../constants/orderConstants';
 
-function HandlePay({order}, successPaymentHandler) {
-  const config = {
-    public_key: process.env.REACT_APP_PUBLIC_KEY,
-    tx_ref: Date.now(),
-    amount: order.totalPrice,
-    currency: 'NGN',
-    payment_options: 'card,mobilemoney,ussd',
-    customer: {
-      email: order.email,
-      phonenumber: '07064586146',
-      name: order.name,
-    },
-    customizations: {
-      title: 'Payment',
-      description: 'Payment for items in cart',
-    },
-  };
+// function HandlePay({order}, paymentHandler) {
+//   const config = {
+//     public_key: process.env.REACT_APP_PUBLIC_KEY,
+//     tx_ref: Date.now(),
+//     amount: order.totalPrice,
+//     currency: 'NGN',
+//     payment_options: 'card,mobilemoney,ussd',
+//     customer: {
+//       email: order.email,
+//       phonenumber: '07064586146',
+//       name: order.name,
+//     },
+//     customizations: {
+//       title: 'Payment',
+//       description: 'Payment for items in cart',
+//     },
+//   };
 
-  const handleFlutterPayment = useFlutterwave(config);
+//   const handleFlutterPayment = useFlutterwave(config);
 
-  return (<button
-    className="primary"
-    onClick={() => {
-      handleFlutterPayment({
-        callback: (response) => {
-          successPaymentHandler();
-          console.log(response);
-          closePaymentModal();
-        },
-        onClose: () => {},
-      });
-    }}
-  >
-    Pay Now
-  </button>);
-};
+//   return (<button
+//     className="primary"
+//     onClick={() => {
+//       handleFlutterPayment({
+//         callback: (response) => {
+//           // paymentHandler(response);
+//           // console.log(response);
+//           closePaymentModal();
+//         },
+//         onClose: () => {},
+//       });
+//     }}
+//   >
+//     Pay Now
+//   </button>);
+// };
 
 export default function OrderScreen(props) {
   const orderId = props.match.params.id;
 
   const orderDetails = useSelector(state => state.orderDetails);
+  // console.log(orderDetails);
   const { order, loading, error } = orderDetails;
+
+  const orderPay = useSelector(state => state.orderPay);
+  const { loading: loadingPay, error: errorPay, success: successPay } = orderPay;
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(detailsOrder(orderId));
-  }, [dispatch, orderId]);
+    if (!order ) {
+      dispatch({ type: ORDER_PAY_RESET });
+      dispatch(detailsOrder(orderId));
+    }
+  }, [order, dispatch, orderId, successPay]);
 
-  const successPaymentHandler = () => {
-    //
+  // function successPaymentHandler (paymentResult) {
+  //   dispatch(payOrder(order, paymentResult));
+  // };
+
+  const handlePaymentForm = () => {
+    props.history.push("/paymentform")
   }
 
   return loading
@@ -163,7 +175,37 @@ export default function OrderScreen(props) {
                   </li>
                   <li>
                     <div className="row">
-                      {!order.isPaid && <HandlePay order={order}></HandlePay>}
+                      <>
+                        {
+                          errorPay && (
+                            <MessageBox variant="danger">{errorPay}</MessageBox>
+                          )
+                        }
+                        { loadingPay && <LoadingBox></LoadingBox> }
+                        {
+                          !order.order.isPaid && 
+                          <button
+                            className="primary"
+                            onClick={ () => handlePaymentForm() }
+                            // onClick={() => {
+                            //   handleFlutterPayment({
+                            //     callback: (response) => {
+                            //       // paymentHandler(response);
+                            //       // console.log(response);
+                            //       closePaymentModal();
+                            //     },
+                            //     onClose: () => {},
+                            //   });
+                            // }}
+                          >
+                            Pay with Paystack
+                          </button>
+                          // <HandlePay 
+                          //   order={order} 
+                          //   // paymentHandler = {successPaymentHandler}
+                          // ></HandlePay>
+                        }
+                      </>
                     </div>
                   </li>
                 </ul>

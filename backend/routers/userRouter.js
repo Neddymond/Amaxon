@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
 const data = require("../data");
+const auth = require("../Auth/auth");
+const bcrypt = require("bcrypt");
 
 /** Endpoint for creating an account */
 router.post("/register", async (req, res) => {
@@ -12,9 +14,10 @@ router.post("/register", async (req, res) => {
       res.status(400).send();
     }
 
-    const token = user.GenerateAuthToken();
+    const token = await user.GenerateAuthToken();
 
     res.send({ user, token });
+    console.log(user, token)
   } catch (e) {
     res.status(500).send(e);
   }
@@ -57,6 +60,31 @@ router.get("/:id", async (req, res) => {
   } catch (e) {
     res.status(500).send({ message: e });
   }
+});
+
+router.put("/profile", auth, async (req, res) => {
+  const user = req.user;
+
+  user.name = req.body.name || user.name;
+  user.email = req.body.email || user.email;
+
+  if (req.body.password) {
+    user.password = bcrypt.hashSync(req.body.password, 8);
+  }
+
+  const token = await user.GenerateAuthToken();
+
+  const updatedUser = await user.save();
+
+  res.send({
+    user: {
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin
+    },
+    token
+  })
 });
 
 module.exports = router;

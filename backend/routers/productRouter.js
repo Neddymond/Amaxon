@@ -9,13 +9,13 @@ router.get("/", async (req, res) => {
     // const products = await Product.find({});
     const products = await Product.insertMany(data.products);
 
-    await products.save();
+    const newProducts =  await products.save();
 
-    if (!products) {
+    if (!newProducts) {
       return res.status(400).send();
     }
 
-    res.send(products);
+    res.send(newProducts);
   } catch (e) {
     res.status(500).send(e);
   }

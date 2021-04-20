@@ -6,7 +6,8 @@ const data = require("../data");
 // Endpoint for fetching all products
 router.get("/", async (req, res) => {
   try {
-    const products = await Product.find({});
+    // const products = await Product.find({});
+    const products = await Product.insertMany(data.products);
 
     if (!products) {
       return res.status(404).send({ message: "Products not found" });

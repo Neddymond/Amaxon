@@ -11,6 +11,6 @@ app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
 app.use("/api/orders", orderRouter);
 
-app.get("/", (req, res) => res.send("Server is ready"));
+// app.get("/", (req, res) => res.send("Server is ready"));
 
 app.listen(port, () => console.log(`Listening to server at port: ${port}`));

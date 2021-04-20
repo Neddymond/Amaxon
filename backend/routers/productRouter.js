@@ -9,8 +9,10 @@ router.get("/", async (req, res) => {
     // const products = await Product.find({});
     const products = await Product.insertMany(data.products);
 
+    await products.save();
+
     if (!products) {
-      return res.status(404).send({ message: "Products not found" });
+      return res.status(400).send();
     }
 
     res.send(products);

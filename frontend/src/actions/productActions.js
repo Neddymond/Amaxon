@@ -15,7 +15,7 @@ export const listProducts = () => async (dispatch) => {
 
   try {
     const { data } = await Axios.get("/api/products");
-    // console.log(data);
+    console.log(data);
     dispatch({ 
       type: PRODUCT_LIST_SUCCESS,
       payload: data

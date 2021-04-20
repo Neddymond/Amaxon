@@ -4,7 +4,7 @@
   "description": "Amaxon is an Amazon clone created using Node.JS and React.\r This project waas inspired by @basir",
   "main": "index.js",
   "scripts": {
-    "start": "env-cmd -f config/config.env node ./backend/server.js",
+    "start": "node ./backend/server.js",
     "heroku-postbuild": "cd frontend && npm install && npm run build",
     "dev": "env-cmd -f config/config.env nodemon ./backend/server.js"
   },
